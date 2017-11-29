@@ -4,10 +4,11 @@ using namespace std;
 int *toBits(int number)
 {
     int *bits = new int[32];
+    int mask = 1;
     for (int i = 0; i < 32; i++)
     {
-        bits[i] = number % 2;
-        number /= 2;
+        bits[i] = number & mask ? 1 : 0;
+        mask = mask << 1;
     }
     return bits;
 }
