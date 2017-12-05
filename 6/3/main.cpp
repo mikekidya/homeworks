@@ -42,12 +42,14 @@ int main()
                 cout << "Enter name: " << endl;
                 name = input();
                 cout << findPhone(base, name) << endl;
+                delete[] name;
                 break;
 
             case '3':
                 cout << "Enter phone: " << endl;
                 phone = input();
                 cout << findName(base, phone) << endl;
+                delete[] phone;
                 break;
 
             case '4':
