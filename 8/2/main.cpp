@@ -20,8 +20,9 @@ int main()
 
     cout << "Enter two words: ";
 
-    String *string1 = inputString(cin, ' ');
-    String *string2 = inputString(cin, ' ');
+    char separators[9] = {' ', '\n', '\'', '"', ',', '.', '!', '?', ':'};
+    String *string1 = inputString(cin, separators, 9);
+    String *string2 = inputString(cin, separators, 9);
 
     printEquality(string1, string2);
 

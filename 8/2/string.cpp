@@ -120,7 +120,15 @@ void printString(String *string, std::ostream &stream)
         stream << string->string[i];
 }
 
-String *inputString(std::istream &stream, char separator)
+bool isSeparator(char symbol, char *separators, int separatorsNumber)
+{
+    for (int i = 0; i < separatorsNumber; i++)
+        if (symbol == separators[i])
+            return true;
+    return false;
+}
+
+String *inputString(std::istream &stream, char *separators, int separatorsNumber)
 {
     int const bufferSize = 256;
 
@@ -133,10 +141,12 @@ String *inputString(std::istream &stream, char separator)
     String *result = createString(emptyLine);
 
     char currentSymbol;
-
     currentSymbol = stream.get();
+    while (isSeparator(currentSymbol, separators, separatorsNumber))
+        currentSymbol = stream.get();
+
     int currentIndex = 0;
-    while (currentSymbol != separator && currentSymbol != '\n' && !stream.eof())
+    while (!isSeparator(currentSymbol, separators, separatorsNumber) && !stream.eof())
     {
         if (currentIndex == bufferSize - 1)
         {
