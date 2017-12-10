@@ -128,8 +128,9 @@ String *inputString(std::istream &stream, char separator)
     for (int i = 0; i < bufferSize; i++)
         buffer[i] = '\0';
 
-
-    String *result = createString((char *) "");
+    char emptyLine[1];
+    emptyLine[0] = '\0';
+    String *result = createString(emptyLine);
 
     char currentSymbol;
 
@@ -159,4 +160,12 @@ String *inputString(std::istream &stream, char separator)
     delete[] buffer;
 
     return result;
+}
+
+char getChar(String *string, int index)
+{
+    if (0 <= index && index < string->length)
+        return string->string[index];
+
+    return '\0';
 }

@@ -40,6 +40,9 @@ int main()
     String *trunc = subString(cloned, 1, stringLength(cloned) - 1);
     cout << "Deleted first symbol: ";
     printString(trunc, cout);
+    cout << endl;
+
+    cout << "First and last are: " << getChar(trunc, 0) << " " << getChar(trunc, stringLength(trunc) - 1) << endl;
 
     deleteString(string1);
     deleteString(string2);
