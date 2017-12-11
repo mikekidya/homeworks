@@ -74,6 +74,7 @@ bool isEqual(String *string, String *secondString)
 void deleteString(String *string)
 {
     delete[] string->string;
+    delete string->string;
     delete string;
 }
 
