@@ -31,6 +31,12 @@ void clearTree(BinarySearchTree *tree)
     tree->root = nullptr;
 }
 
+void deleteTree(BinarySearchTree *tree)
+{
+    clearTree(tree);
+    delete tree;
+}
+
 bool containsNode(BSTNode *node, int value)
 {
     if (node == nullptr)

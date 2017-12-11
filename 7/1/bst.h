@@ -8,6 +8,7 @@ struct BinarySearchTree
 };
 
 BinarySearchTree *createTree();
+void deleteTree(BinarySearchTree *tree);
 void clearTree(BinarySearchTree *tree);
 
 bool contains(BinarySearchTree *tree, int value);

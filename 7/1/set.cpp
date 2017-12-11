@@ -16,6 +16,7 @@ Set *createSet()
 void deleteSet(Set *set)
 {
     clearTree(set->tree);
+    delete set->tree;
     delete set;
 }
 

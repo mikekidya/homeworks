@@ -5,11 +5,12 @@ using namespace std;
 void printInstruction()
 {
     cout << "SET" << endl;
-    cout << "0 - Exit" << endl;
-    cout << "1 - Add" << endl;
-    cout << "2 - Pop" << endl;
-    cout << "3 - Check" << endl;
-    cout << "4 - Print" << endl;
+    cout << "Supported commands: ";
+    cout << "exit" << endl;
+    cout << "add" << endl;
+    cout << "pop" << endl;
+    cout << "check" << endl;
+    cout << "print" << endl;
 }
 
 int main()
@@ -17,7 +18,10 @@ int main()
     Set *set = createSet();
 
     printInstruction();
-    int choice = -1;
+
+    enum choice {exit = 0, add = 1, pop = 2, check = 3, print = 4};
+
+    choice ch;
     cin >> choice;
 
     while (choice != 0)
