@@ -30,7 +30,11 @@ int main()
 
     cout << "Words and their frequencies:" << endl;
     printElements(hastTable, cout);
-    cout << "Load factor: " << loadFactor(hastTable) << endl;
+    cout << "Load factor (average bucket length): " << loadFactor(hastTable) << endl;
+    cout << "Maximal bucket: " << endl;
+    printMaxBucket(hastTable, cout);
+    cout << "Number of added words: " << numberOfWords(hastTable) << endl;
+    cout << "Number of empty buckets: " << numberOfEmptyBuckets(hastTable) << endl;
 
     deleteTable(hastTable);
 

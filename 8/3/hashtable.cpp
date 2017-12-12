@@ -11,7 +11,6 @@ struct HastTable
 {
     int const size = 10007;
     TableElement **bucket;
-    double loadFactor;
 };
 
 int hash(String *string, int mod)
@@ -33,7 +32,6 @@ int hash(String *string, int mod)
 HastTable *createTable()
 {
     HastTable *newTable = new HastTable;
-    newTable->loadFactor = 0.0;
 
     newTable->bucket = new TableElement*[newTable->size];
     for (int i = 0; i < newTable->size; i++)
@@ -65,8 +63,6 @@ void deleteTable(HastTable *hastTable)
 void add(HastTable *hastTable, String *string)
 {
     int index = hash(string, hastTable->size);
-
-    hastTable->loadFactor += (1.0 / hastTable->size);
 
     TableElement *tmp = hastTable->bucket[index];
     while (tmp != nullptr)
@@ -100,22 +96,88 @@ bool contains(HastTable *hastTable, String *string)
     return false;
 }
 
-double loadFactor(HastTable *hastTable)
+int numberOfElements(HastTable *hastTable)
 {
-    return hastTable->loadFactor;
-}
-
-
-void printElements(HastTable *hastTable, std::ostream &stream)
-{
+    int result = 0;
     for (int i = 0; i < hastTable->size; i++)
     {
         TableElement *tmp = hastTable->bucket[i];
         while (tmp != nullptr)
         {
-            printString(tmp->string, stream);
-            stream << " " << tmp->count << std::endl;
+            result++;
             tmp = tmp->nextElement;
         }
     }
+    return result;
+}
+
+double loadFactor(HastTable *hastTable)
+{
+    return (double) numberOfElements(hastTable) / hastTable->size;
+}
+
+int numberOfWords(HastTable *hastTable)
+{
+    int result = 0;
+    for (int i = 0; i < hastTable->size; i++)
+    {
+        TableElement *tmp = hastTable->bucket[i];
+        while (tmp != nullptr)
+        {
+            result += tmp->count;
+            tmp = tmp->nextElement;
+        }
+    }
+    return result;
+}
+
+int numberOfEmptyBuckets(HastTable *hastTable)
+{
+    int result = 0;
+    for (int i = 0; i < hastTable->size; i++)
+        if(hastTable->bucket[i] == nullptr)
+            result++;
+
+    return result;
+}
+
+
+void printBucket(HastTable *hastTable, int bucket, std::ostream &stream)
+{
+    TableElement *tmp = hastTable->bucket[bucket];
+    while (tmp != nullptr)
+    {
+        printString(tmp->string, stream);
+        stream << " " << tmp->count << std::endl;
+        tmp = tmp->nextElement;
+    }
+
+}
+
+void printElements(HastTable *hastTable, std::ostream &stream)
+{
+    for (int i = 0; i < hastTable->size; i++)
+        printBucket(hastTable, i, stream);
+}
+
+int printMaxBucket(HastTable *hastTable, std::ostream &stream)
+{
+    int maxValue = 0;
+    int maxBucket = 0;
+    for (int i = 0; i < hastTable->size; i++)
+    {
+        int current = 0;
+        TableElement *tmp = hastTable->bucket[i];
+        while (tmp != nullptr)
+        {
+            current++;
+            tmp = tmp->nextElement;
+        }
+        if (current > maxValue)
+        {
+            maxValue = current;
+            maxBucket = i;
+        }
+    }
+    printBucket(hastTable, maxBucket, stream);
 }
