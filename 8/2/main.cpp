@@ -5,7 +5,7 @@ using namespace std;
 
 void printEquality(String *string1, String *string2)
 {
-    cout << "Words \"";
+    cout << "Strings \"";
     printString(string1, cout);
     cout << "\" and \"";
     printString(string2, cout);
@@ -18,11 +18,10 @@ void printEquality(String *string1, String *string2)
 int main()
 {
 
-    cout << "Enter two words: ";
+    cout << "Enter two strings: " << endl;
 
-    char separators[9] = {' ', '\n', '\'', '"', ',', '.', '!', '?', ':'};
-    String *string1 = inputString(cin, separators, 9);
-    String *string2 = inputString(cin, separators, 9);
+    String *string1 = inputString(cin);
+    String *string2 = inputString(cin);
 
     printEquality(string1, string2);
 
