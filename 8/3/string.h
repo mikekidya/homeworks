@@ -18,4 +18,4 @@ String *subString(String *string, int begin, int end);
 char getChar(String *string, int index);
 
 void printString(String *string, std::ostream &stream);
-String *inputString(std::istream &stream, char *separators, int separatorsNumber);
+String *inputString(std::istream &stream);

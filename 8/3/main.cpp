@@ -6,6 +6,35 @@
 
 using namespace std;
 
+bool isSeparator(char symbol)
+{
+    return symbol == '\0' || symbol == '\n' || symbol == ' ' ||
+           symbol == ','  || symbol == '!'  || symbol == '?' ||
+           symbol == ':'  || symbol == ';'  || symbol == '.';
+}
+
+void addWords(HastTable *hastTable, String *string)
+{
+    int wordBegin = 0;
+    int wordEnd = 0;
+    int currentIndex = 0;
+    while (currentIndex < stringLength(string))
+    {
+        currentIndex = wordEnd;
+        while (currentIndex < stringLength(string) && isSeparator(getChar(string, currentIndex)))
+            currentIndex++;
+        wordBegin = currentIndex;
+
+        while (currentIndex < stringLength(string) && !isSeparator(getChar(string, currentIndex)))
+            currentIndex++;
+        wordEnd = currentIndex;
+
+        if (wordBegin < wordEnd)
+            add(hastTable, subString(string, wordBegin, wordEnd - 1));
+    }
+    deleteString(string);
+}
+
 int main()
 {
     ifstream inputFile;
@@ -17,14 +46,12 @@ int main()
         return 0;
     }
 
-    char separators[9] = {' ', '\n', '\'', '"', ',', '.', '!', '?', ':'};
-
     HastTable *hastTable = createTable();
 
     while (!inputFile.eof())
     {
-        String *newWord = inputString(inputFile, separators, 9);
-        add(hastTable, newWord);
+        String *newLine = inputString(inputFile);
+        addWords(hastTable, newLine);
     }
     inputFile.close();
 
