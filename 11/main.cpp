@@ -7,7 +7,7 @@ bool isDigit(char symbol)
 
 int main()
 {
-    enum {start, afterSigh, integralPart, afterDot, digitAfterDot, afterE, afterESigh, digitAfterE, fail} status;
+    enum {start, afterSign, integralPart, afterDot, digitAfterDot, afterE, afterESign, digitAfterE, fail} status;
     status = start;
 
     char current = std::cin.get();
@@ -18,13 +18,13 @@ int main()
         {
             case start:
                 if (current == '+' || current == '-')
-                    status = afterSigh;
+                    status = afterSign;
                 else if (isDigit(current))
                     status = integralPart;
                 else
                     status = fail;
                 break;
-            case afterSigh:
+            case afterSign:
                 if (isDigit(current))
                     status = integralPart;
                 else
@@ -56,13 +56,13 @@ int main()
                 break;
             case afterE:
                 if (current == '+' || current == '-')
-                    status = afterESigh;
+                    status = afterESign;
                 else if (isDigit(current))
                     status = digitAfterE;
                 else
                     status = fail;
                 break;
-            case afterESigh:
+            case afterESign:
                 if (isDigit(current))
                     status = digitAfterE;
                 else
