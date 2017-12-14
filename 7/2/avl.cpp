@@ -141,6 +141,12 @@ void clearTree(AVLTree *tree)
     tree->root = nullptr;
 }
 
+void deleteTree(AVLTree *tree)
+{
+    clearTree(tree);
+    delete tree;
+}
+
 bool containsNode(AVLNode *node, int value)
 {
     if (node == nullptr)

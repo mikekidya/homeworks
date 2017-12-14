@@ -9,6 +9,7 @@ struct AVLTree
 
 AVLTree *createTree();
 void clearTree(AVLTree *tree);
+void deleteTree(AVLTree *tree);
 
 bool contains(AVLTree *tree, int value);
 void add(AVLTree *tree, int value);

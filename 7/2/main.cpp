@@ -5,6 +5,7 @@ using namespace std;
 void printInstruction()
 {
     cout << "SET" << endl;
+    cout << "Supported commands: " << endl;
     cout << "0 - Exit" << endl;
     cout << "1 - Add" << endl;
     cout << "2 - Pop" << endl;
@@ -17,7 +18,11 @@ int main()
     Set *set = createSet();
 
     printInstruction();
-    int choice = -1;
+
+    enum choices {exit, add, pop, check, print};
+    enum print {increasingOrder = 1, decreasingOrder = 2, treeForm = 3};
+
+    int choice;
     cin >> choice;
 
     while (choice != 0)
@@ -25,40 +30,47 @@ int main()
         int value = 0;
         switch (choice)
         {
-            case 1:
+            case add:
                 cout << "Enter number to add: ";
                 cin >> value;
-                add(set, value);
+                addSet(set, value);
                 break;
 
-            case 2:
+            case pop:
                 cout << "Enter number to pop: ";
                 cin >> value;
-                pop(set, value);
+                popSet(set, value);
                 break;
 
-            case 3:
+            case check:
                 cout << "Enter number to check: ";
                 cin >> value;
                 cout << value << " is" << (isContained(set, value) ? "" : " not") << " in set" << endl;
                 break;
 
-            case 4:
+            case print:
                 cout << " 1 - Increasing Order \n 2 - Decreasing order \n 3 - Tree form" << endl;
                 cin >> value;
-                if (value == 1)
-                    print(set);
-                else if (value == 2)
-                    printReverse(set);
-                else if (value == 3)
-                    printTree(set);
-                else
-                    cout << "Unknown command";
-                cout << endl;
+                switch (value)
+                {
+                    case increasingOrder:
+                        printSet(set);
+                        break;
+                    case decreasingOrder:
+                        printReverse(set);
+                        break;
+                    case treeForm:
+                        printTree(set);
+                        break;
+                    default:
+                        cout << "Unknown command";
+                        break;
+                }
                 break;
 
             default:
                 cout << "Unknown command" << endl;
+                break;
         }
         cin >> choice;
     }

@@ -15,16 +15,16 @@ Set *createSet()
 
 void deleteSet(Set *set)
 {
-    clearTree(set->tree);
+    deleteTree(set->tree);
     delete set;
 }
 
-void add(Set *set, int value)
+void addSet(Set *set, int value)
 {
     add(set->tree, value);
 }
 
-void pop(Set *set, int value)
+void popSet(Set *set, int value)
 {
     remove(set->tree, value);
 }
@@ -34,7 +34,7 @@ bool isContained(Set *set, int value)
     return contains(set->tree, value);
 }
 
-void print(Set *set)
+void printSet(Set *set)
 {
     printLeft(set->tree);
 }
