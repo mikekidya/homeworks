@@ -2,7 +2,7 @@
 
 struct ListElement
 {
-    Member *member;
+    int value;
     ListElement *next;
 };
 
@@ -27,24 +27,45 @@ void deleteList(List *list)
 {
     while (!isEmpty(list))
     {
-        popList(list);
+        popHeadList(list);
     }
+    delete list;
 }
 
-void addList(List *list, Member *member)
+void addList(List *list, int value)
 {
     ListElement *newElement = new ListElement;
-    newElement->member = member;
+    newElement->value = value;
     newElement->next = list->head;
     list->head = newElement;
 }
 
-Member *popList(List *list)
+int popHeadList(List *list)
 {
     ListElement *currentElement = list->head;
-    Member *currentMember = currentElement->member;
     list->head = currentElement->next;
+    int value = currentElement->value;
     delete currentElement;
-    return currentMember;
+    return value;
 }
 
+bool isSymmetricalElement(ListElement *element)
+{
+    if (element == nullptr || element->next == nullptr)
+        return true;
+
+    ListElement *lastElement = element;
+    while (lastElement->next->next != nullptr)
+        lastElement = lastElement->next;
+
+    ListElement *tmp = lastElement->next;
+    lastElement->next = nullptr;
+    bool result = isSymmetricalElement(element->next) && (element->value == tmp->value);
+    lastElement->next = tmp;
+    return result;
+}
+
+bool isSymmetrical(List *list)
+{
+    return isSymmetricalElement(list->head);
+}

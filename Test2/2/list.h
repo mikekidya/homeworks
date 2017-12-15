@@ -1,13 +1,12 @@
 #pragma once
 
-#include "members.h"
-
 struct List;
 
 List *createList();
 void deleteList(List *list);
 
-void addList(List *list, Member *member);
-Member *popList(List *list);
+void addList(List *list, int value);
+int popHeadList(List *list);
 
 bool isEmpty(List *list);
+bool isSymmetrical(List *list);
