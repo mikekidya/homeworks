@@ -8,11 +8,12 @@ int main()
     Set *set = createSet();
 
     cout << "Enter a sequence: " << endl;
-    int current = -1;
+    int current = 0;
+    cin >> current;
     while (current != 0)
     {
-        cin >> current;
         addSet(set, current);
+        cin >> current;
     }
 
     cout << "Numbers in sequence: " << endl;
