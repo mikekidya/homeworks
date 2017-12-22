@@ -36,6 +36,8 @@ int main()
     Graph *graph = inputGraph(inputFile);
     inputFile.close();
 
+    cout << "Vertexes in BFS order: " << endl;
+
     printBFS(graph, 0, cout);
 
     deleteGraph(graph);
