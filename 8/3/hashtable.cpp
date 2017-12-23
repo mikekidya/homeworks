@@ -70,6 +70,7 @@ void add(HastTable *hastTable, String *string)
         if (isEqual(tmp->string, string))
         {
             tmp->count++;
+            deleteString(string);
             return;
         }
         tmp = tmp->nextElement;
