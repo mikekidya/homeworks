@@ -43,7 +43,7 @@ int stringFind(String *string, String *wanted, int start)
         }
 
         if (i + stringLength(wanted) < stringLength(string))
-            currentHash = ((((currentHash - ((int) getChar(string, i)) * power + mod * mod) % mod) * prime) % mod
+            currentHash = (((((currentHash - ((int) getChar(string, i)) * power) % mod + mod) % mod) * prime) % mod
                            + getChar(string, i + stringLength(wanted))) % mod;
 
     }
