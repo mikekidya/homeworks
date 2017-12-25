@@ -17,8 +17,5 @@ char *toChar(String *string);
 String *subString(String *string, int begin, int end);
 char getChar(String *string, int index);
 
-// returns the first occurrence index or -1 if not found
-int find(String *string, String *subString, int start);
-
 void printString(String *string, std::ostream &stream);
 String *inputString(std::istream &stream);

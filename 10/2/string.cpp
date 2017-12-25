@@ -170,35 +170,3 @@ char getChar(String *string, int index)
 
     return '\0';
 }
-
-int hash(String *string)
-{
-    int const mod = 10007;
-    int const prime = 37;
-
-    int result = 0;
-    for (int i = 0; i < stringLength(string); i++)
-        result = ((result * prime) % mod + (int) getChar(string, i)) % mod;
-
-    return result;
-}
-
-int find(String *string, String *wanted, int start)
-{
-    if (start + stringLength(wanted) > stringLength(string))
-        return -1;
-
-    int subHash = hash(wanted);
-    for (int i = start; i <= stringLength(string) - stringLength(wanted); i++)
-    {
-        String *slice = subString(string, i, i + stringLength(wanted) - 1);
-        if ((hash(slice) == subHash) && isEqual(wanted, slice))
-        {
-            deleteString(slice);
-            return i;
-        }
-        deleteString(slice);
-    }
-
-    return -1;
-}
