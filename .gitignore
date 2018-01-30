@@ -1,0 +1,5 @@
+$ cat .gitignore
+*CMakeLists*
+*cmake-build-debug*
+*.idea*
+*.DS_Store*
