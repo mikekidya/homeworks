@@ -20,13 +20,8 @@ public class Stack {
         }
     }
 
-    private Node head;
-    private int size;
-
-    Stack() {
-        head = null;
-        size = 0;
-    }
+    private Node head = null;
+    private int size = 0;
 
     public void add(int value) {
         head = new Node(value, head);
