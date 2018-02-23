@@ -2,7 +2,11 @@ $ cat .gitignore
 *CMakeLists*
 *cmake-build-debug*
 *.idea*
+<<<<<<< HEAD
 *.gradle/*
+=======
+*.gradle*
+>>>>>>> c7411c115aa4c95b8b75608ed75d5b961006a837
 */build/*
 */out/*
 *.DS_Store*
