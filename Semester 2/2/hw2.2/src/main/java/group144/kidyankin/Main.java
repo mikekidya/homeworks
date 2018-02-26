@@ -1,31 +1,29 @@
 package group144.kidyankin;
 
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int[][] array = arrayInput(in);
         System.out.print("Print in spiral order in file (F) or screen (S)? ");
-        switch (in.next()) {
-            case "F": {
-                PrintStream file = new PrintStream("output.txt");
-                SpiralWriter writer = new FileOutputter();
-                writer.printSpiral(array);
-                file.close();
-                break;
-            }
-            case "S": {
-                SpiralWriter writer = new ConsoleOutputter();
-                writer.printSpiral(array);
-                break;
-            }
-            default:
-                System.out.println("Incorrect choice");
-                break;
+        String choice = in.next();
+        while (!choice.equals("F") && !choice.equals("S")) {
+            System.out.println("Incorrect choice. Try again: ");
+            choice = in.next();
+        }
+        SpiralWriter writer;
+        if (choice.equals("F")) {
+            writer = new FileOutputter();
+        } else {
+            writer = new ConsoleOutputter();
+        }
+        try {
+            writer.printSpiral(array);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
         }
     }
 
