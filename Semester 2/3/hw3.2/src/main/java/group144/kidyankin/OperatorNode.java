@@ -10,25 +10,23 @@ public class OperatorNode implements ExpressionTreeNode {
     private ExpressionTreeNode right;
 
     OperatorNode(Scanner scanner) throws WrongTreeInputException {
-        try {
-            String input = scanner.next();
-            operation = input.charAt(input.length() - 1); // "(+"
-            if (scanner.hasNextInt()) {
-                left = new OperandNode(scanner);
-            } else {
-                left = new OperatorNode(scanner);
-            }
-            if (scanner.hasNext(Pattern.compile("[-]?[0-9]+([)]+)?"))) {
-                right = new OperandNode(scanner);
-            } else {
-                right = new OperatorNode(scanner);
-            }
-        } catch (Exception exception) {
-            throw new WrongTreeInputException();
-        }
+        String input = scanner.next();
+        operation = input.charAt(input.length() - 1); // "(+"
         if (operation != '+' && operation != '-' && operation != '*' && operation != '/') {
-            throw new WrongTreeInputException();
+            throw new WrongTreeInputException("Wrong structure: operation was expected");
         }
+
+        if (scanner.hasNextInt()) {
+            left = new OperandNode(scanner);
+        } else {
+            left = new OperatorNode(scanner);
+        }
+        if (scanner.hasNext(Pattern.compile("[-]?[0-9]+([)]+)?"))) {
+            right = new OperandNode(scanner);
+        } else {
+            right = new OperatorNode(scanner);
+        }
+
     }
 
     @Override

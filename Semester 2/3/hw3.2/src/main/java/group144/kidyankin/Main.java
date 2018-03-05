@@ -17,7 +17,7 @@ public class Main {
         } catch (FileNotFoundException fileException) {
             System.out.println("File is not found");
         } catch (WrongTreeInputException wrongTreeException) {
-            System.out.println("Wrong tree input");
+            System.out.println(wrongTreeException.getMessage());
         }
     }
 }

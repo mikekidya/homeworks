@@ -15,8 +15,8 @@ public class OperandNode implements ExpressionTreeNode {
                 value = Integer.parseInt(input);
             }
 
-        } catch (Exception exception) {
-            throw new WrongTreeInputException();
+        } catch (NumberFormatException exception) {
+            throw new WrongTreeInputException("Wrong structure: number was expected");
         }
     }
 
