@@ -30,7 +30,10 @@ public class LinkedStack<ElementType> implements Stack<ElementType> {
     }
 
     @Override
-    public ElementType pop() {
+    public ElementType pop() throws EmptyStackException{
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
         ElementType result = head.getValue();
         head = head.getNext();
         size -= 1;

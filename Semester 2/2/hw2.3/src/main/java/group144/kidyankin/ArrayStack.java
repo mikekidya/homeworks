@@ -19,7 +19,10 @@ public class ArrayStack<ElementType> implements Stack<ElementType> {
     }
 
     @Override
-    public ElementType pop() {
+    public ElementType pop() throws EmptyStackException{
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
         currentPosition--;
         return array[currentPosition];
     }

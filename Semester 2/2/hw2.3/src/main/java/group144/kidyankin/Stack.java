@@ -4,7 +4,7 @@ public interface Stack<ElementType> {
 
     void push(ElementType value);
 
-    ElementType pop();
+    ElementType pop() throws EmptyStackException;
 
     boolean isEmpty();
 
