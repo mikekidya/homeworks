@@ -17,6 +17,14 @@ public class LinkedStackTest {
         assertTrue(stack.pop().equals(1));
     }
 
+    @Test(expected = EmptyStackException.class)
+    public void popExceptionTest() {
+        Stack<Integer> stack = new ArrayStack<>();
+        stack.push(1);
+        assertTrue(stack.pop().equals(1));
+        stack.pop();
+    }
+
     @Test
     public void getSizeTest() {
         Stack<Integer> stack = new LinkedStack<>();
