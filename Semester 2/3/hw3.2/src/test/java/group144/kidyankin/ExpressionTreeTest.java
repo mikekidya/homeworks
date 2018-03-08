@@ -28,6 +28,18 @@ public class ExpressionTreeTest {
         assertEquals(-12, tree.calculate());
     }
 
+    @Test(expected = WrongTreeInputException.class)
+    public void noOperandExceptionTest() throws WrongTreeInputException{
+        ExpressionTree noOperand = new ExpressionTree(new Scanner("(+ -2 (- - 6))"));
+        noOperand.calculate();
+    }
+
+    @Test(expected = WrongTreeInputException.class)
+    public void wrongBracketsExceptionTest() throws WrongTreeInputException{
+        ExpressionTree wrongBrackets = new ExpressionTree(new Scanner("(+ (-2 (- -4 6))"));
+        wrongBrackets.calculate();
+    }
+
     @Test
     public void printTest() throws WrongTreeInputException {
         ExpressionTree tree = new ExpressionTree(new Scanner("(- (+ 2 4) (* 1 15))"));
