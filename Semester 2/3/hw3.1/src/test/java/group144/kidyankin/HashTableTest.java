@@ -26,6 +26,15 @@ public class HashTableTest {
         assertEquals(2, hashTable.getElementNumber());
     }
 
+    @Test(expected = ElementNotFound.class)
+    public void deleteExceptionTest() {
+        HashTable hashTable = new HashTable(37, new StringLengthHash());
+        hashTable.add("Peter");
+        hashTable.add("Piper");
+        hashTable.add("Pepper");
+        hashTable.delete("Misha");
+    }
+
     @Test
     public void containsTest() {
         HashTable hashTable = new HashTable(37, new StringLengthHash());

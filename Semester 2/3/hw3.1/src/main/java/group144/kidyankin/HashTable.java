@@ -26,7 +26,7 @@ public class HashTable {
         elementNumber++;
     }
 
-    public void delete(String element) {
+    public void delete(String element) throws ElementNotFound {
         int index = hashFunction.hash(element, table.size());
         if (table.get(index).remove(element)){
             elementNumber--;
