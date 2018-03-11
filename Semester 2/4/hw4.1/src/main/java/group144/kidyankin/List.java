@@ -69,7 +69,7 @@ public class List<T> {
      * @throws IndexOutOfBoundsException if index out of range
      */
     public void add(T value, int index) throws IndexOutOfBoundsException {
-        if (index >= length) {
+        if (index >= length || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         Node<T> tmp = head;
