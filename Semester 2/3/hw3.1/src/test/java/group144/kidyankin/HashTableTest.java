@@ -16,7 +16,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void deleteTest() {
+    public void deleteTest() throws ElementNotFoundException {
         HashTable hashTable = new HashTable(37, new StringLengthHash());
         hashTable.add("Peter");
         hashTable.add("Piper");
@@ -26,8 +26,8 @@ public class HashTableTest {
         assertEquals(2, hashTable.getElementNumber());
     }
 
-    @Test(expected = ElementNotFound.class)
-    public void deleteExceptionTest() {
+    @Test(expected = ElementNotFoundException.class)
+    public void deleteExceptionTest() throws ElementNotFoundException {
         HashTable hashTable = new HashTable(37, new StringLengthHash());
         hashTable.add("Peter");
         hashTable.add("Piper");
@@ -36,7 +36,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void containsTest() {
+    public void containsTest() throws ElementNotFoundException {
         HashTable hashTable = new HashTable(37, new StringLengthHash());
         hashTable.add("Peter");
         hashTable.add("Piper");
@@ -52,7 +52,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void getElementNumberTest() {
+    public void getElementNumberTest() throws ElementNotFoundException {
         HashTable hashTable = new HashTable(37, new StringLengthHash());
         hashTable.add("Peter");
         hashTable.add("Piper");
@@ -65,7 +65,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void getConflictNumberTest() {
+    public void getConflictNumberTest() throws ElementNotFoundException {
         HashTable hashTable = new HashTable(37, new StringLengthHash());
         hashTable.add("Peter");
         hashTable.add("Piper");
@@ -78,7 +78,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void getMaxListSizeTest() {
+    public void getMaxListSizeTest() throws ElementNotFoundException {
         HashTable hashTable = new HashTable(37, new StringLengthHash());
         hashTable.add("Peter");
         hashTable.add("Piper");

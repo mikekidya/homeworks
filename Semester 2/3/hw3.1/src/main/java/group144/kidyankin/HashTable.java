@@ -26,7 +26,7 @@ public class HashTable {
         elementNumber++;
     }
 
-    public void delete(String element) throws ElementNotFound {
+    public void delete(String element) throws ElementNotFoundException {
         int index = hashFunction.hash(element, table.size());
         if (table.get(index).remove(element)){
             elementNumber--;
@@ -34,7 +34,7 @@ public class HashTable {
                 conflictNumber--;
             }
         } else {
-            throw new ElementNotFound();
+            throw new ElementNotFoundException();
         }
     }
 

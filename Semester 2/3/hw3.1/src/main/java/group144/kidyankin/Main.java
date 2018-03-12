@@ -20,8 +20,12 @@ public class Main {
                 case "delete":
                     String word = in.next();
                     if (hashTable.contains(word)) {
-                        hashTable.delete(word);
-                        System.out.println("Deleted");
+                        try {
+                            hashTable.delete(word);
+                            System.out.println("Deleted");
+                        } catch (ElementNotFoundException e) {
+                            System.out.println("Element is not found");
+                        }
                     } else {
                         System.out.println("Word is not found");
                     }
