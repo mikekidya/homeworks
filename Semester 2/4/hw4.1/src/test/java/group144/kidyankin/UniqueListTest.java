@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class UniqueListTest {
 
     @Test
-    public void addToHeadTest() {
+    public void addToHeadTest() throws NoSuchElementException {
         UniqueList<Integer> list = new UniqueList<>();
         list.add(1);
         list.add(2);
@@ -22,7 +22,7 @@ public class UniqueListTest {
     }
 
     @Test
-    public void addWithIndexTest() {
+    public void addWithIndexTest() throws NoSuchElementException {
         UniqueList<String> list = new UniqueList<>();
         list.add("Peter");
         list.add("Piper", 0);

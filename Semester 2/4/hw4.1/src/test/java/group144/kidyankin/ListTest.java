@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ListTest {
 
     @Test
-    public void isEmptyTest() {
+    public void isEmptyTest() throws NoSuchElementException {
         List<Integer> list = new List<>();
         assertTrue(list.isEmpty());
         list.add(1);
@@ -17,7 +17,7 @@ public class ListTest {
     }
 
     @Test
-    public void getLengthTest() {
+    public void getLengthTest() throws NoSuchElementException {
         List<Integer> list = new List<>();
         list.add(1);
         assertEquals(1, list.getLength());
@@ -29,7 +29,7 @@ public class ListTest {
     }
 
     @Test
-    public void addToHeadTest() {
+    public void addToHeadTest() throws NoSuchElementException {
         List<Integer> list = new List<>();
         list.add(1);
         list.add(2);
@@ -40,7 +40,7 @@ public class ListTest {
     }
 
     @Test
-    public void addWithIndexTest() {
+    public void addWithIndexTest() throws NoSuchElementException {
         List<Integer> list = new List<>();
         list.add(1);
         list.add(2, 0);
@@ -59,7 +59,7 @@ public class ListTest {
     }
 
     @Test
-    public void popFromHeadTest() {
+    public void popFromHeadTest() throws NoSuchElementException {
         List<Integer> list = new List<>();
         list.add(1);
         list.add(2);
@@ -70,7 +70,7 @@ public class ListTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void popFromHeadExceptionTest() {
+    public void popFromHeadExceptionTest() throws NoSuchElementException {
         List<String> list = new List<>();
         list.pop();
         list.add("Hello");
@@ -79,7 +79,7 @@ public class ListTest {
     }
 
     @Test
-    public void popWithIndexTest() {
+    public void popWithIndexTest() throws NoSuchElementException {
         List<Integer> list = new List<>();
         list.add(1);
         list.add(2);
@@ -90,7 +90,7 @@ public class ListTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void popWithIndexExceptionTest() {
+    public void popWithIndexExceptionTest() throws NoSuchElementException {
         List<String> list = new List<>();
         list.pop(3);
         list.add("Hello");
