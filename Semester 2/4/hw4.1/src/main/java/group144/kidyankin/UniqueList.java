@@ -1,5 +1,10 @@
 package group144.kidyankin;
 
+/**
+ * Class realizing Simple Linked List without repetitive elements
+ *
+ * @param <T> Type parameter
+ */
 public class UniqueList<T> extends List<T> {
 
     /**

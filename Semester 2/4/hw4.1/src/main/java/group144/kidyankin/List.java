@@ -1,5 +1,9 @@
 package group144.kidyankin;
 
+/**
+ * Class realizing Simple Linked List
+ * @param <T> Type parameter
+ */
 public class List<T> {
 
     /**
