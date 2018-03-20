@@ -1,9 +1,16 @@
 package group144.kidyankin;
 
-/** Class realizing a queue with elements are in order of their priority */
+/**
+ * Class realizing a queue with elements are in order of their priority
+ *
+ * @param <T> Type of contained elements
+ */
 public class PriorityQueue<T> {
 
-    /** Class realizing a queue element */
+    /** Class realizing a queue element
+     *
+     * @param <T> Type of value element
+     */
     private class QueueNode<T> {
         private T value;
         private int priority;
