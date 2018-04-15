@@ -207,8 +207,8 @@ public class AVLTree<T extends Comparable<T>> implements Collection<T> {
      * Class realizing the AVL Tree Iterator
      */
     private class AVLTreeIterator implements Iterator<T> {
-        Node current;
-        int repeatCounter;
+        private Node current;
+        private int repeatCounter;
 
         AVLTreeIterator() {
             if (isEmpty()) {
@@ -274,12 +274,12 @@ public class AVLTree<T extends Comparable<T>> implements Collection<T> {
      * Realizing some operations like add, remove and rotations.
      */
     private class Node {
-        T value;
-        Node parent;
-        Node leftChild = null;
-        Node rightChild = null;
-        int height = 1;
-        int number = 1;
+        private T value;
+        private Node parent;
+        private Node leftChild = null;
+        private Node rightChild = null;
+        private int height = 1;
+        private int number = 1;
 
         Node(T value, Node parent) {
             this.value = value;
