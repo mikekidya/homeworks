@@ -1,10 +1,12 @@
 package group144.kidyankin;
 
+import java.io.*;
+
 /**
  * Class realizing trie data structure.
  * Collect words which are containing only letters a...z
  */
-public class Trie {
+public class Trie implements Serializable {
 
     private int ALPHABET_SIZE = 26;
     private Node head = new Node();
@@ -57,7 +59,7 @@ public class Trie {
      * @return the number of words in the trie
      */
     public int size() {
-        return head.suffixNumber;
+        return size;
     }
 
     /**
@@ -71,8 +73,33 @@ public class Trie {
         return head.howManyStartWithPrefix(prefix, 0);
     }
 
+    /**
+     * Puts object in output stream to save it.
+     *
+     * @param out Output Stream where object will be saved
+     * @throws IOException if something wrong with output stream
+     */
+    public void serialize(OutputStream out) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(out);
+        oos.writeObject(this);
+    }
+
+    /**
+     * Gets object from input stream and replace current one with it.
+     *
+     * @param in Input Stream where object will be gotten from
+     * @throws IOException if something wrong with inputStream stream
+     * @throws ClassNotFoundException if class definition of a serialized object cannot be found
+     */
+    public void deserialize(InputStream in) throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(in);
+        Trie newTrie = (Trie) ois.readObject();
+        head = newTrie.head;
+        size = newTrie.size;
+    }
+
     /** Class realizing trie node */
-    private class Node {
+    private class Node implements Serializable {
 
         private boolean isTerminal = false;
         private Node[] next = new Node[ALPHABET_SIZE];

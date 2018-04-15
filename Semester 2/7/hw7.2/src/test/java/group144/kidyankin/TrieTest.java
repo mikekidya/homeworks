@@ -2,6 +2,8 @@ package group144.kidyankin;
 
 import org.junit.Test;
 
+import java.io.*;
+
 import static org.junit.Assert.*;
 
 /** Tests for trie data structure */
@@ -99,6 +101,22 @@ public class TrieTest {
     public void removeExceptionTest() throws UnsupportedWordSymbol {
         Trie trie = new Trie();
         trie.remove("Hello");
+    }
+
+    @Test
+    public void serializeTest() throws IOException, ClassNotFoundException, UnsupportedWordSymbol {
+        Trie trie = new Trie();
+        trie.add("hello");
+        trie.add("hear");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        trie.serialize(outputStream);
+        trie.add("guitar");
+        trie.remove("hello");
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+        trie.deserialize(inputStream);
+        assertEquals(2, trie.size());
+        assertFalse(trie.contains("guitar"));
+        assertTrue(trie.contains("hello"));
     }
 
 }
