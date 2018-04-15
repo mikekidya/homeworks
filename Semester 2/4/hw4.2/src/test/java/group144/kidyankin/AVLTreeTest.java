@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -192,5 +193,20 @@ public class AVLTreeTest {
         avlTree.add("Peter");
         avlTree.add("Piper");
         assertEquals("(Peter:2 null (Piper:1 null null))", avlTree.toString());
+    }
+
+    @Test
+    public void iteratorTest() {
+        AVLTree<String> avlTree = new AVLTree<>();
+        avlTree.add("Peter");
+        avlTree.add("Peter");
+        avlTree.add("Piper");
+        Iterator<String> avlTreeIterator = avlTree.iterator();
+        assertTrue(avlTreeIterator.hasNext());
+        assertEquals(avlTreeIterator.next(), "Peter");
+        assertEquals(avlTreeIterator.next(), "Peter");
+        assertTrue(avlTreeIterator.hasNext());
+        assertEquals(avlTreeIterator.next(), "Piper");
+        assertFalse(avlTreeIterator.hasNext());
     }
 }
