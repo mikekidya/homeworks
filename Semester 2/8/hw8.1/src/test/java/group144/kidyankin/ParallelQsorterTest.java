@@ -2,7 +2,6 @@ package group144.kidyankin;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Stream;
 
