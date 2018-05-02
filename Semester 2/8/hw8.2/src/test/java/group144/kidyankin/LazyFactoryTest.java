@@ -76,6 +76,7 @@ public class LazyFactoryTest {
         for (int j = 0; j < 100; j++) {
             FunctionWithCounter<String> myFunction = new FunctionWithCounter<>(() -> "Hello");
             Lazy<String> myLazy = LazyFactory.createMultiThreadLazy(myFunction);
+            // Lazy<String> myLazy = LazyFactory.createOneThreadLazy(myFunction); // replace to this and test won't pass
             List<String> answers = Collections.synchronizedList(new ArrayList<>());
             Thread[] threads = new Thread[100];
             for (int i = 0; i < threads.length; i++) {
@@ -99,7 +100,7 @@ public class LazyFactoryTest {
      * @param <T> type of returning value
      */
     public class FunctionWithCounter<T> implements Supplier<T> {
-        private int counter = 0;
+        private volatile int counter = 0;
         private Supplier<T> function;
 
         public FunctionWithCounter(Supplier<T> function) {
@@ -108,7 +109,9 @@ public class LazyFactoryTest {
 
         @Override
         public T get() {
-            counter++;
+            synchronized (this) {
+                counter++;
+            }
             return function.get();
         }
 
