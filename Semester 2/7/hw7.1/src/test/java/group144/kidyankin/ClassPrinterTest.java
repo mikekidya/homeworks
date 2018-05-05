@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -14,8 +15,8 @@ public class ClassPrinterTest {
     public void printStack() throws IOException, ClassNotFoundException {
         ClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file://")});
         Class<?> clazz = classLoader.loadClass("group144.kidyankin.Stack");
-        String EXPECTED =
-                "public class Stack { \n" +
+        char[] EXPECTED =
+                ("public class Stack { \n" +
                 "\n" +
                 "// Fields: \n" +
                 "private Node head;\n" +
@@ -45,16 +46,19 @@ public class ClassPrinterTest {
                 "\n" +
                 "} \n" +
                 "\n" +
-                "} \n";
-        assertEquals(EXPECTED, ClassPrinter.print(clazz));
+                "} \n").toCharArray();
+        Arrays.sort(EXPECTED);
+        char[] result = ClassPrinter.print(clazz).toCharArray();
+        Arrays.sort(result);
+        assertArrayEquals(EXPECTED, result);
     }
 
     @Test
     public void printList() throws IOException, ClassNotFoundException {
         ClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file://")});
         Class<?> clazz = classLoader.loadClass("group144.kidyankin.List");
-        String EXPECTED =
-                "public class List<T> { \n" +
+        char[] EXPECTED =
+                ("public class List<T> { \n" +
                 "\n" +
                 "// Fields: \n" +
                 "private Node head;\n" +
@@ -88,16 +92,19 @@ public class ClassPrinterTest {
                 "\n" +
                 "} \n" +
                 "\n" +
-                "} \n";
-        assertEquals(EXPECTED, ClassPrinter.print(clazz));
+                "} \n").toCharArray();
+        Arrays.sort(EXPECTED);
+        char[] result = ClassPrinter.print(clazz).toCharArray();
+        Arrays.sort(result);
+        assertArrayEquals(EXPECTED, result);
     }
 
     @Test
     public void printUniqueList() throws IOException, ClassNotFoundException {
         ClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file://")});
         Class<?> clazz = classLoader.loadClass("group144.kidyankin.UniqueList");
-        String EXPECTED =
-                "public class UniqueList<T> extends List { \n" +
+        char[] EXPECTED =
+                ("public class UniqueList<T> extends List { \n" +
                 "\n" +
                 "// Constructors: \n" +
                 "public UniqueList();\n" +
@@ -106,7 +113,10 @@ public class ClassPrinterTest {
                 "public add(class java.lang.Object arg0) throws group144.kidyankin.ElementAlreadyAddedException;\n" +
                 "public add(class java.lang.Object arg0, int arg1) throws java.lang.IndexOutOfBoundsException, group144.kidyankin.ElementAlreadyAddedException;\n" +
                 "\n" +
-                "} \n";
-        assertEquals(EXPECTED, ClassPrinter.print(clazz));
+                "} \n").toCharArray();
+        Arrays.sort(EXPECTED);
+        char[] result = ClassPrinter.print(clazz).toCharArray();
+        Arrays.sort(result);
+        assertArrayEquals(EXPECTED, result);
     }
 }
