@@ -47,10 +47,12 @@ public class Bullet {
         updateTime();
     }
 
+    /** Interpolates the position of the bullet */
     public void interpolate(float alpha) {
         position.interpolate(null, alpha);
     }
 
+    /** Renders the bullet */
     public void render(Graphics g) {
         g.drawTexture(image, position.getRenderX() - image.getWidth() / 2, position.getRenderY() - image.getHeight() / 2);
     }

@@ -6,6 +6,8 @@ import org.mini2Dx.core.geom.Point;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
+
+/** Class realising gun */
 public class Gun {
     private static final float START_POSITION = 20;
 
@@ -42,11 +44,13 @@ public class Gun {
         }
     }
 
+    /** Interpolates the position of the gun */
     public void interpolate(float alpha) {
         position.interpolate(null, alpha);
 
     }
 
+    /** Renders the gun */
     public void render(Graphics g) {
         g.drawSprite(sprite, position.getRenderX() - sprite.getWidth() / 2, position.getRenderY() - sprite.getHeight() / 2);
     }

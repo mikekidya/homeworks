@@ -6,6 +6,8 @@ import org.mini2Dx.core.graphics.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/** Class realising pool for bullets produced by gun */
 public class BulletsController {
 
     private List<Bullet> bullets = new LinkedList<Bullet>();
@@ -46,12 +48,14 @@ public class BulletsController {
         bullets.removeAll(removeList);
     }
 
+    /** Renders all bullets in game */
     public void renderAll(Graphics g) {
         for (Bullet bullet : bullets) {
             bullet.render(g);
         }
     }
 
+    /** Interpolates all bullets positions */
     public void interpolateAll(float alpha) {
         for (Bullet bullet : bullets) {
             bullet.interpolate(alpha);

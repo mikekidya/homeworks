@@ -31,6 +31,6 @@ public interface Landscape {
      */
     boolean isUnderGround(float x, float y);
 
-    /** Renders the langscape */
+    /** Renders the landscape */
     void render(Graphics g);
 }
