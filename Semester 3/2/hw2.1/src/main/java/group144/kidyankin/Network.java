@@ -7,7 +7,6 @@ import java.util.List;
 public class Network {
 
     private List<Computer> computers;
-    private List<Computer> infected;
     private List<Computer> couldBeInfected;
 
     /**
@@ -15,7 +14,6 @@ public class Network {
      */
     public Network() {
         computers = new LinkedList<>();
-        infected = new LinkedList<>();
         couldBeInfected = new LinkedList<>();
     }
 
@@ -27,7 +25,6 @@ public class Network {
         for (Computer comp : computers) {
             if (comp.equals(infected)) {
                 comp.setInfected(true);
-                this.infected.add(comp);
                 couldBeInfected.addAll(addNewProbablyInfected(comp));
                 break;
             }
@@ -58,7 +55,6 @@ public class Network {
         List<Computer> newProbablyInfected = new LinkedList<>();
         for (Computer computer : couldBeInfected) {
             if (computer.tryInfect()) {
-                infected.add(computer);
                 listOfNewInfected.add(computer);
                 newProbablyInfected.addAll(addNewProbablyInfected(computer));
             }

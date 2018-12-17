@@ -104,6 +104,6 @@ public class Computer {
 
     @Override
     public boolean equals(Object obj) {
-        return this.name.equals(((Computer) obj).name);
+        return (obj instanceof Computer) && this.name.equals(((Computer) obj).name);
     }
 }

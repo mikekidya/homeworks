@@ -53,10 +53,10 @@ public class NetworkTest {
         Network network = new Network();
         network.addComputer(a);
         network.addComputer(b);
-        List<Computer> EXPECTED = new ArrayList<>();
-        EXPECTED.add(a);
-        EXPECTED.add(b);
-        assertEquals(EXPECTED, network.getComputers());
+        List<Computer> expected = new ArrayList<>();
+        expected.add(a);
+        expected.add(b);
+        assertEquals(expected, network.getComputers());
     }
 
     @Test
