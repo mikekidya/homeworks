@@ -145,6 +145,48 @@ public class NetworkTest {
         network.modelStep();
         network.modelStep();
         assertTrue(e.isInfected());
-
     }
+
+    @Test
+    public void logicTest() {
+        OS macOS = new OS("macOS", 0.2);
+        OS bolgenOS = new OS("BolgenOS", 1);
+
+        Computer a = new Computer("A", macOS);
+        Computer b = new Computer("B", bolgenOS);
+        Computer c = new Computer("C", bolgenOS);
+        Computer d = new Computer("D", bolgenOS);
+        Computer e = new Computer("E", bolgenOS);
+        a.addConnected(b);
+        a.addConnected(c);
+        b.addConnected(c);
+        c.addConnected(d);
+        d.addConnected(e);
+
+        Network network = new Network();
+        network.addComputer(a);
+        network.addComputer(b);
+        network.addComputer(c);
+        network.addComputer(d);
+        network.addComputer(e);
+        network.setFirstInfected(a);
+
+        assertTrue(a.isInfected());
+        assertFalse(b.isInfected());
+        assertFalse(c.isInfected());
+        assertFalse(d.isInfected());
+        assertFalse(e.isInfected());
+        network.modelStep();
+        assertTrue(a.isInfected());
+        assertTrue(b.isInfected());
+        assertTrue(c.isInfected());
+        assertFalse(d.isInfected());
+        assertFalse(e.isInfected());
+        network.modelStep();
+        assertTrue(d.isInfected());
+        assertFalse(e.isInfected());
+        network.modelStep();
+        assertTrue(e.isInfected());
+    }
+
 }
