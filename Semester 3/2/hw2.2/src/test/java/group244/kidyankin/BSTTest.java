@@ -2,9 +2,7 @@ package group244.kidyankin;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -186,5 +184,22 @@ public class BSTTest {
         assertTrue(avlTreeIterator.hasNext());
         assertEquals(avlTreeIterator.next(), "Piper");
         assertFalse(avlTreeIterator.hasNext());
+    }
+
+    @Test
+    public void foreachTest() {
+        Collection<String> tree = new BinarySearchTree<>();
+        LinkedList<String> iterated = new LinkedList<>();
+        tree.add("Peter");
+        tree.add("Peter");
+        tree.add("Piper");
+        for (String element : tree) {
+            iterated.add(element);
+        }
+        assertEquals(iterated.getFirst(), "Peter");
+        iterated.removeFirst();
+        assertEquals(iterated.getFirst(), "Peter");
+        iterated.removeFirst();
+        assertEquals(iterated.getFirst(), "Piper");
     }
 }
