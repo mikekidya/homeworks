@@ -32,6 +32,9 @@ public class Gun {
     public void damage(Bullet bullet) {
         if (bullet.getDamageRadius() > (getPosition().getDistanceTo((Positionable) bullet.getPosition()))) {
             health -= bullet.getDamage();
+            if (health <= 0) {
+                TanksGame.gameStatus = TanksGame.GameStatuses.FINISHED;
+            }
         }
     }
 

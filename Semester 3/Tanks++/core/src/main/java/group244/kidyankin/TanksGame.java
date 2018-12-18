@@ -6,13 +6,15 @@ import com.badlogic.gdx.graphics.Texture;
 import org.mini2Dx.core.game.BasicGame;
 import org.mini2Dx.core.graphics.Graphics;
 
-import java.security.Key;
 import java.util.Collections;
-import java.util.Timer;
 
 /** Main controller class of the game */
 public class TanksGame extends BasicGame {
     public static final String GAME_IDENTIFIER = "group244.kidyankin";
+
+    public enum GameStatuses {FINISHED, WAITING, PLAYING}
+    public static GameStatuses gameStatus = GameStatuses.PLAYING;
+
 
     private final float DUCK_GRAVITY = 0.05f;
     private final float DUCK_SPEED = 10;
@@ -49,35 +51,37 @@ public class TanksGame extends BasicGame {
     public void update(float delta) {
         bulletsController.updateAll();
 
-        if (Gdx.input.isKeyPressed(Keys.UP)) {
-            gun.rotate(2);
-        }
-        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-            gun.rotate(-2);
-        }
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-            gun.move(-2);
-        }
-        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            gun.move(2);
-        }
-        if (Gdx.input.isKeyPressed(Keys.C)) {
-            if (System.currentTimeMillis() - lastTimeBulletChanged > 300) {
-                lastTimeBulletChanged = System.currentTimeMillis();
-                if (currentConfiguration == duckBullet) {
-                    currentConfiguration = pianoBullet;
-                } else {
-                    currentConfiguration = duckBullet;
+        if (gameStatus == GameStatuses.PLAYING) {
+            if (Gdx.input.isKeyPressed(Keys.UP)) {
+                gun.rotate(2);
+            }
+            if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+                gun.rotate(-2);
+            }
+            if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+                gun.move(-2);
+            }
+            if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+                gun.move(2);
+            }
+            if (Gdx.input.isKeyPressed(Keys.C)) {
+                if (System.currentTimeMillis() - lastTimeBulletChanged > 300) {
+                    lastTimeBulletChanged = System.currentTimeMillis();
+                    if (currentConfiguration == duckBullet) {
+                        currentConfiguration = pianoBullet;
+                    } else {
+                        currentConfiguration = duckBullet;
+                    }
                 }
-            }
 
-        }
-        if (Gdx.input.isKeyPressed(Keys.ENTER) || Gdx.input.isKeyPressed(Keys.SPACE)) {
-            if (System.currentTimeMillis() - lastTimeBulletProduced > 100) {
-                lastTimeBulletProduced = System.currentTimeMillis();
-                bulletsController.addBullet(currentConfiguration, gun);
             }
+            if (Gdx.input.isKeyPressed(Keys.ENTER) || Gdx.input.isKeyPressed(Keys.SPACE)) {
+                if (System.currentTimeMillis() - lastTimeBulletProduced > 100) {
+                    lastTimeBulletProduced = System.currentTimeMillis();
+                    bulletsController.addBullet(currentConfiguration, gun);
+                }
 
+            }
         }
     }
     
@@ -92,5 +96,8 @@ public class TanksGame extends BasicGame {
         landscape.render(g);
         bulletsController.renderAll(g);
         gun.render(g);
+        if (gameStatus == GameStatuses.FINISHED) {
+            g.drawString("GAME OVER", g.getWindowWidth() / 2 - 50, g.getWindowHeight() / 2 - 50);
+        }
     }
 }
