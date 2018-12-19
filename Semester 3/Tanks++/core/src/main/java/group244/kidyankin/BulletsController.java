@@ -23,7 +23,8 @@ public class BulletsController {
     }
 
 
-    public void addBullet(BulletConfiguration configuration, Gun parentGun) {
+    public void addBullet(Gun parentGun) {
+        BulletConfiguration configuration = parentGun.getBulletConfiguration();
         bullets.add(new Bullet(
                 configuration.getImage(),
                 parentGun.getPosition().getX(),

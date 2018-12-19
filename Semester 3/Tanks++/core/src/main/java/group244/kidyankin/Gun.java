@@ -7,20 +7,25 @@ import org.mini2Dx.core.geom.Point;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
+import java.util.List;
+
 
 /** Class realising gun */
 public class Gun {
-    private static final float START_POSITION = 20;
 
     private CollisionPoint position;
     private Sprite sprite = new Sprite(new Texture("gun.png"));
     private Landscape landscape;
     private float health = 100;
+    private List<BulletConfiguration> bulletConfigurations;
+    private BulletConfiguration currentBulletConfiguration;
 
     /** Creates a gun on given landscape */
-    public Gun(Landscape landscape) {
+    public Gun(Landscape landscape, float startPosition, List<BulletConfiguration> bulletConfigurations) {
         this.landscape = landscape;
-        position = new CollisionPoint(START_POSITION, landscape.getYCoordinate(START_POSITION));
+        position = new CollisionPoint(startPosition, landscape.getYCoordinate(startPosition));
+        this.bulletConfigurations = bulletConfigurations;
+        currentBulletConfiguration = bulletConfigurations.get(0);
     }
 
     /** Returns the center position of the gun */
@@ -65,5 +70,14 @@ public class Gun {
     public void render(Graphics g) {
         g.drawSprite(sprite, position.getRenderX() - sprite.getWidth() / 2, position.getRenderY() - sprite.getHeight() / 2);
         g.drawString(Integer.toString((int) health), position.getRenderX() - 10, position.getRenderY() - 10);
+    }
+
+    public BulletConfiguration getBulletConfiguration() {
+        return currentBulletConfiguration;
+    }
+
+    public void changeBulletConfiguration() {
+        int currentIndex = bulletConfigurations.indexOf(currentBulletConfiguration);
+        currentBulletConfiguration = bulletConfigurations.get((currentIndex + 1) % bulletConfigurations.size());
     }
 }
