@@ -42,7 +42,6 @@ public class TanksGame extends BasicGame {
     private long lastTimeBulletChanged = 0;
 
     public TanksGame(Socket socket, boolean isServer) {
-        //super();
         this.socket = socket;
         this.isServer = isServer;
     }

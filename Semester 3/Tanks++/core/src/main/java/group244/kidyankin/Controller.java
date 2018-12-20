@@ -8,16 +8,16 @@ public class Controller {
     private final float MOVEMENT_SPEED = 2;
     private final float ROTATION_SPEED = 2;
 
-    private ObjectInputStream inputStream;
-    private ObjectOutputStream outputStream;
+    private InputStream inputStream;
+    private OutputStream outputStream;
     private Gun playerGun;
     private Gun otherGun;
     private BulletsController bulletsController;
 
     public Controller(Socket socket, Gun playerGun, Gun otherGun, BulletsController bulletsController) throws IOException {
-        outputStream = new ObjectOutputStream(socket.getOutputStream());
+        outputStream = socket.getOutputStream();
         outputStream.flush();
-        inputStream = new ObjectInputStream(socket.getInputStream());
+        inputStream = socket.getInputStream();
         this.playerGun = playerGun;
         this.otherGun = otherGun;
         this.bulletsController = bulletsController;
@@ -78,9 +78,5 @@ public class Controller {
     }
 
     public enum EventType {MOVE_GUN_LEFT, MOVE_GUN_RIGHT, ROTATE_GUN_LEFT, ROTATE_GUN_RIGHT, CHANGE_BULLET, PRODUCE_BULLET}
-
-
-
-
 
 }
