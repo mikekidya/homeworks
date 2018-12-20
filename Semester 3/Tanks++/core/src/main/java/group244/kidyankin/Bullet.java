@@ -52,10 +52,12 @@ public class Bullet {
         updateTime();
     }
 
+    /** Returns the damage radius of the bullet */
     public float getDamageRadius() {
         return damageRadius;
     }
 
+    /** Returns the damage of the bullet */
     public float getDamage() {
         return damage;
     }

@@ -3,6 +3,7 @@ package group244.kidyankin;
 import java.io.*;
 import java.net.Socket;
 
+/** Class controlling the actions in game and synchronization between players */
 public class Controller {
 
     private final float MOVEMENT_SPEED = 2;
@@ -14,6 +15,17 @@ public class Controller {
     private Gun otherGun;
     private BulletsController bulletsController;
 
+    /** Enum represents all possible actions player can produce */
+    public enum EventType {MOVE_GUN_LEFT, MOVE_GUN_RIGHT, ROTATE_GUN_LEFT, ROTATE_GUN_RIGHT, CHANGE_BULLET, PRODUCE_BULLET}
+
+    /**
+     * Creates controller with given properties
+     * @param socket socket using for connection between two players
+     * @param playerGun the gun of player
+     * @param otherGun the gun of the opponent
+     * @param bulletsController the bullets controller of the game
+     * @throws IOException if some socket issues
+     */
     public Controller(Socket socket, Gun playerGun, Gun otherGun, BulletsController bulletsController) throws IOException {
         outputStream = socket.getOutputStream();
         outputStream.flush();
@@ -23,6 +35,11 @@ public class Controller {
         this.bulletsController = bulletsController;
     }
 
+    /**
+     * Processes the game action of certain type and sends information to opponent
+     * @param eventType the type of game action
+     * @throws ConnectionException if the are any issues with connection between two players
+     */
     public void evaluateEvent(EventType eventType) throws ConnectionException {
         sendEvent(eventType);
         evaluate(eventType, playerGun);
@@ -31,6 +48,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Evaluates the actions produced by opponent
+     * @throws ConnectionException  if the are any issues with connection between two players
+     */
     public void evaluateOtherPlayerEvents() throws ConnectionException {
         try {
             while (inputStream.available() > 0) {
@@ -81,7 +102,5 @@ public class Controller {
             throw new ConnectionException();
         }
     }
-
-    public enum EventType {MOVE_GUN_LEFT, MOVE_GUN_RIGHT, ROTATE_GUN_LEFT, ROTATE_GUN_RIGHT, CHANGE_BULLET, PRODUCE_BULLET}
 
 }

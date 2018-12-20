@@ -16,7 +16,10 @@ import java.util.List;
 public class TanksGame extends BasicGame {
     public static final String GAME_IDENTIFIER = "group244.kidyankin";
 
-    public enum GameStatuses {FINISHED, WAITING_FOR_TURN, WAITING_FOR_BULLET, PLAYING}
+    /** Enum representing all possible states of the game */
+    public enum GameStatuses {FINISHED, WAITING_FOR_TURN, WAITING_FOR_BULLET, PLAYING, FAILED}
+
+    /** Stores the current status of the game */
     public static GameStatuses gameStatus;
 
     private final float DUCK_GRAVITY = 0.05f;
@@ -37,9 +40,12 @@ public class TanksGame extends BasicGame {
     private Gun otherGun;
     private Landscape landscape;
     private BulletsController bulletsController;
-    private long lastTimeBulletProduced = 0;
-    private long lastTimeBulletChanged = 0;
 
+    /**
+     * Initialises the game
+     * @param socket socket using for connection between two players
+     * @param isServer if this player is a server player
+     */
     public TanksGame(Socket socket, boolean isServer) {
         this.socket = socket;
         this.isServer = isServer;
@@ -97,21 +103,14 @@ public class TanksGame extends BasicGame {
                     controller.evaluateEvent(Controller.EventType.MOVE_GUN_RIGHT);
                 }
                 if (Gdx.input.isKeyPressed(Keys.C)) {
-                    if (System.currentTimeMillis() - lastTimeBulletChanged > 300) {
-                        lastTimeBulletChanged = System.currentTimeMillis();
-                        controller.evaluateEvent(Controller.EventType.CHANGE_BULLET);
-                    }
-
+                    controller.evaluateEvent(Controller.EventType.CHANGE_BULLET);
                 }
                 if (Gdx.input.isKeyPressed(Keys.ENTER) || Gdx.input.isKeyPressed(Keys.SPACE)) {
-                    if (System.currentTimeMillis() - lastTimeBulletProduced > 100) {
-                        lastTimeBulletProduced = System.currentTimeMillis();
                         controller.evaluateEvent(Controller.EventType.PRODUCE_BULLET);
-                    }
                 }
             }
         } catch (ConnectionException e) {
-            e.printStackTrace();
+            gameStatus = GameStatuses.FAILED;
         }
     }
     
@@ -136,6 +135,9 @@ public class TanksGame extends BasicGame {
         );
         if (gameStatus == GameStatuses.FINISHED) {
             g.drawString("GAME OVER", g.getWindowWidth() / 2 - 50, g.getWindowHeight() / 2 - 50);
+        }
+        if (gameStatus == GameStatuses.FAILED) {
+            g.drawString("CONNECTION LOST", g.getWindowWidth() / 2 - 50, g.getWindowHeight() / 2 - 50);
         }
     }
 }

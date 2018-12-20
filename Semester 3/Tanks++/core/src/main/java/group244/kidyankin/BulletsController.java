@@ -1,7 +1,5 @@
 package group244.kidyankin;
 
-import com.badlogic.gdx.graphics.Texture;
-import org.mini2Dx.core.geom.Circle;
 import org.mini2Dx.core.graphics.Graphics;
 
 import java.util.Collection;
@@ -23,6 +21,7 @@ public class BulletsController {
     }
 
 
+    /** Adds a bullet produced by gun into bullets controller */
     public void addBullet(Gun parentGun) {
         BulletConfiguration configuration = parentGun.getBulletConfiguration();
         bullets.add(new Bullet(
@@ -37,6 +36,7 @@ public class BulletsController {
         ));
     }
 
+    /** Returns the number of bullets in game */
     public int numberOfBullets() {
         return bullets.size();
     }

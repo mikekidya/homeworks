@@ -17,9 +17,12 @@ public class DesktopLauncherClient {
     public static void main (String[] arg) {
         System.out.println("Tanks++. Client");
         try {
-            System.out.println("Enter the port:");
+            System.out.println("Enter the server IP:");
             Scanner scanner = new Scanner(System.in);
-            Socket socket = new Socket(InetAddress.getByName("192.168.0.101"), scanner.nextInt());
+            String ip = scanner.next();
+            System.out.println("Enter the port:");
+            int port = scanner.nextInt();
+            Socket socket = new Socket(InetAddress.getByName(ip), port);
             DesktopMini2DxConfig config = new DesktopMini2DxConfig(TanksGame.GAME_IDENTIFIER);
             config.title = "Tank";
             config.width = 800;
