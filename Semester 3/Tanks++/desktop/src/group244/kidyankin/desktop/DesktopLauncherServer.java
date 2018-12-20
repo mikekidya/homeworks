@@ -5,6 +5,7 @@ import group244.kidyankin.TanksGame;
 import org.mini2Dx.desktop.DesktopMini2DxConfig;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 
 /** Class realising method to launch game on desktop */
@@ -13,7 +14,8 @@ public class DesktopLauncherServer {
         System.out.println("Tanks++. Server");
         ServerSocket serverSocket;
         try {
-            serverSocket = new ServerSocket(0); // creates socket on random free port
+            serverSocket = new ServerSocket(0, 0, InetAddress.getByName("127.0.0.1")); // creates socket on random free port
+            System.out.println("IP: " + serverSocket.getLocalSocketAddress().toString());
             System.out.println("Port: " + serverSocket.getLocalPort());
             DesktopMini2DxConfig config = new DesktopMini2DxConfig(TanksGame.GAME_IDENTIFIER);
             config.title = "Tank";

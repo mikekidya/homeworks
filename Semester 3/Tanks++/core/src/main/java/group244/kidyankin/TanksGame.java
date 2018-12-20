@@ -17,7 +17,7 @@ import java.util.List;
 public class TanksGame extends BasicGame {
     public static final String GAME_IDENTIFIER = "group244.kidyankin";
 
-    public enum GameStatuses {FINISHED, WAITING, PLAYING}
+    public enum GameStatuses {FINISHED, PLAYING}
     public static GameStatuses gameStatus = GameStatuses.PLAYING;
 
     private final float DUCK_GRAVITY = 0.05f;
