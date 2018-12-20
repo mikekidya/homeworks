@@ -14,8 +14,8 @@ public class DesktopLauncherServer {
         System.out.println("Tanks++. Server");
         ServerSocket serverSocket;
         try {
-            serverSocket = new ServerSocket(0, 0, InetAddress.getByName("127.0.0.1")); // creates socket on random free port
-            System.out.println("IP: " + serverSocket.getLocalSocketAddress().toString());
+            serverSocket = new ServerSocket(0, 0, InetAddress.getByName("192.168.0.101")); // creates socket on random free port
+            System.out.println("IP: " + serverSocket.getInetAddress().getHostAddress());
             System.out.println("Port: " + serverSocket.getLocalPort());
             DesktopMini2DxConfig config = new DesktopMini2DxConfig(TanksGame.GAME_IDENTIFIER);
             config.title = "Tank";

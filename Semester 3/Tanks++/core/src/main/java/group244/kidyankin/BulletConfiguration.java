@@ -8,8 +8,10 @@ public class BulletConfiguration {
     private float speed;
     private float damage;
     private float damageRadius;
+    private String name;
 
-    public BulletConfiguration(Texture image, float gravity, float speed, float damage, float damageRadius) {
+    public BulletConfiguration(String name, Texture image, float gravity, float speed, float damage, float damageRadius) {
+        this.name = name;
         this.image = image;
         this.gravity = gravity;
         this.speed = speed;
@@ -35,5 +37,9 @@ public class BulletConfiguration {
 
     public float getDamageRadius() {
         return damageRadius;
+    }
+
+    public String getName() {
+        return name;
     }
 }

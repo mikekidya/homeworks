@@ -10,15 +10,14 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /** Main controller class of the game */
 public class TanksGame extends BasicGame {
     public static final String GAME_IDENTIFIER = "group244.kidyankin";
 
-    public enum GameStatuses {FINISHED, PLAYING}
-    public static GameStatuses gameStatus = GameStatuses.PLAYING;
+    public enum GameStatuses {FINISHED, WAITING_FOR_TURN, WAITING_FOR_BULLET, PLAYING}
+    public static GameStatuses gameStatus;
 
     private final float DUCK_GRAVITY = 0.05f;
     private final float DUCK_SPEED = 10;
@@ -49,13 +48,22 @@ public class TanksGame extends BasicGame {
     @Override
     public void initialise() {
         landscape = new LandscapeSample();
-        BulletConfiguration duckBullet = new BulletConfiguration(new Texture("duck.png"), DUCK_GRAVITY, DUCK_SPEED, DUCK_DAMAGE, DUCK_DAMAGE_RADIUS);
-        BulletConfiguration pianoBullet = new BulletConfiguration(new Texture("piano.png"), PIANO_GRAVITY, PIANO_SPEED, PIANO_DAMAGE, PIANO_DAMAGE_RADIUS);
+        BulletConfiguration duckBullet = new BulletConfiguration(
+                "DUCK", new Texture("duck.png"),
+                DUCK_GRAVITY, DUCK_SPEED,
+                DUCK_DAMAGE, DUCK_DAMAGE_RADIUS
+        );
+        BulletConfiguration pianoBullet = new BulletConfiguration(
+                "PIANO", new Texture("piano.png"),
+                PIANO_GRAVITY, PIANO_SPEED,
+                PIANO_DAMAGE, PIANO_DAMAGE_RADIUS
+        );
         List<BulletConfiguration> bulletConfigurations = new ArrayList<BulletConfiguration>();
         bulletConfigurations.add(duckBullet);
         bulletConfigurations.add(pianoBullet);
         gun = new Gun(landscape, isServer ? 20 : 500, bulletConfigurations);
         otherGun = new Gun(landscape, isServer ? 500 : 20, bulletConfigurations);
+        gameStatus = isServer ? GameStatuses.PLAYING : GameStatuses.WAITING_FOR_TURN;
         Collection<Gun> guns = new ArrayList<Gun>();
         guns.add(gun);
         guns.add(otherGun);
@@ -72,6 +80,9 @@ public class TanksGame extends BasicGame {
         try {
             controller.evaluateOtherPlayerEvents();
             bulletsController.updateAll();
+            if (gameStatus == GameStatuses.WAITING_FOR_BULLET && bulletsController.numberOfBullets() == 0) {
+                gameStatus = GameStatuses.PLAYING;
+            }
             if (gameStatus == GameStatuses.PLAYING) {
                 if (Gdx.input.isKeyPressed(Keys.UP)) {
                     controller.evaluateEvent(Controller.EventType.ROTATE_GUN_LEFT);
@@ -117,6 +128,12 @@ public class TanksGame extends BasicGame {
         bulletsController.renderAll(g);
         gun.render(g);
         otherGun.render(g);
+        g.drawString(
+                String.format("Your gun health: %s, chosen bullet: %s\n", gun.getHealth(), gun.getBulletConfiguration().getName()) +
+                String.format("Opponent gun health: %s, chosen bullet: %s\n", otherGun.getHealth(), otherGun.getBulletConfiguration().getName()) +
+                String.format("Now %s turn", gameStatus == GameStatuses.PLAYING ? "your" : "opponent"),
+                0, 0
+        );
         if (gameStatus == GameStatuses.FINISHED) {
             g.drawString("GAME OVER", g.getWindowWidth() / 2 - 50, g.getWindowHeight() / 2 - 50);
         }

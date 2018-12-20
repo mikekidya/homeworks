@@ -37,6 +37,10 @@ public class BulletsController {
         ));
     }
 
+    public int numberOfBullets() {
+        return bullets.size();
+    }
+
     /** Recalculates the coordinates of all bullets */
     public void updateAll() {
         List<Bullet> removeList = new LinkedList<Bullet>();
@@ -47,6 +51,7 @@ public class BulletsController {
                 for (Gun gun : guns) {
                     gun.damage(bullet);
                 }
+
             }
         }
         bullets.removeAll(removeList);

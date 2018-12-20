@@ -43,6 +43,10 @@ public class Gun {
         }
     }
 
+    public float getHealth() {
+        return health;
+    }
+
     /** Return the angle of the gun in degrees */
     public float getRotation() {
         return sprite.getRotation();

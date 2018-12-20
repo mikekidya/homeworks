@@ -26,6 +26,9 @@ public class Controller {
     public void evaluateEvent(EventType eventType) throws ConnectionException {
         sendEvent(eventType);
         evaluate(eventType, playerGun);
+        if (eventType == EventType.PRODUCE_BULLET) {
+            TanksGame.gameStatus = TanksGame.GameStatuses.WAITING_FOR_TURN;
+        }
     }
 
     public void evaluateOtherPlayerEvents() throws ConnectionException {
@@ -35,6 +38,9 @@ public class Controller {
                 for (EventType eventType : EventType.values()) {
                     if (eventType.ordinal() == input) {
                         evaluate(eventType, otherGun);
+                        if (eventType == EventType.PRODUCE_BULLET) {
+                            TanksGame.gameStatus = TanksGame.GameStatuses.WAITING_FOR_BULLET;
+                        }
                     }
                 }
             }
@@ -67,7 +73,6 @@ public class Controller {
     }
 
     private void sendEvent(EventType eventType) throws ConnectionException {
-
         try {
             outputStream.write(eventType.ordinal());
             outputStream.flush();

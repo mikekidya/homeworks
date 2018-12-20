@@ -19,7 +19,7 @@ public class DesktopLauncherClient {
         try {
             System.out.println("Enter the port:");
             Scanner scanner = new Scanner(System.in);
-            Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), scanner.nextInt());
+            Socket socket = new Socket(InetAddress.getByName("192.168.0.101"), scanner.nextInt());
             DesktopMini2DxConfig config = new DesktopMini2DxConfig(TanksGame.GAME_IDENTIFIER);
             config.title = "Tank";
             config.width = 800;
