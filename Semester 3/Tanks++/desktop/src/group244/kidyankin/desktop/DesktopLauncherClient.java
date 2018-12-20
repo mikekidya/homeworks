@@ -24,7 +24,7 @@ public class DesktopLauncherClient {
             int port = scanner.nextInt();
             Socket socket = new Socket(InetAddress.getByName(ip), port);
             DesktopMini2DxConfig config = new DesktopMini2DxConfig(TanksGame.GAME_IDENTIFIER);
-            config.title = "Tank";
+            config.title = "Tanks. Client";
             config.width = 800;
             config.height = 600;
             config.vSyncEnabled = true;

@@ -14,10 +14,9 @@ public class DesktopLauncherServer {
         ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(0); // creates socket on random free port
-            System.out.println("IP: " + serverSocket.getInetAddress().getHostAddress());
             System.out.println("Port: " + serverSocket.getLocalPort());
             DesktopMini2DxConfig config = new DesktopMini2DxConfig(TanksGame.GAME_IDENTIFIER);
-            config.title = "Tank";
+            config.title = "Tanks. Server";
             config.width = 800;
             config.height = 600;
             config.vSyncEnabled = true;

@@ -41,6 +41,8 @@ public class TanksGame extends BasicGame {
     private Landscape landscape;
     private BulletsController bulletsController;
 
+    private long lastTimeBulletChanged = 0;
+
     /**
      * Initialises the game
      * @param socket socket using for connection between two players
@@ -103,7 +105,10 @@ public class TanksGame extends BasicGame {
                     controller.evaluateEvent(Controller.EventType.MOVE_GUN_RIGHT);
                 }
                 if (Gdx.input.isKeyPressed(Keys.C)) {
-                    controller.evaluateEvent(Controller.EventType.CHANGE_BULLET);
+                    if (System.currentTimeMillis() - lastTimeBulletChanged > 300) {
+                        lastTimeBulletChanged = System.currentTimeMillis();
+                        controller.evaluateEvent(Controller.EventType.CHANGE_BULLET);
+                    }
                 }
                 if (Gdx.input.isKeyPressed(Keys.ENTER) || Gdx.input.isKeyPressed(Keys.SPACE)) {
                         controller.evaluateEvent(Controller.EventType.PRODUCE_BULLET);

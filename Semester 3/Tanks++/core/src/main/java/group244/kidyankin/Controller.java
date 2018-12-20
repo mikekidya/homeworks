@@ -98,7 +98,6 @@ public class Controller {
             outputStream.write(eventType.ordinal());
             outputStream.flush();
         } catch (IOException e) {
-            e.printStackTrace();
             throw new ConnectionException();
         }
     }
