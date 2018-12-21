@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import org.mini2Dx.core.game.BasicGame;
 import org.mini2Dx.core.graphics.Graphics;
+import org.mini2Dx.core.graphics.Sprite;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -128,6 +129,7 @@ public class TanksGame extends BasicGame {
     
     @Override
     public void render(Graphics g) {
+        g.setScale((float) g.getWindowWidth() / 800, (float) g.getWindowHeight() / 600);
         landscape.render(g);
         bulletsController.renderAll(g);
         gun.render(g);
@@ -144,5 +146,6 @@ public class TanksGame extends BasicGame {
         if (gameStatus == GameStatuses.FAILED) {
             g.drawString("CONNECTION LOST", g.getWindowWidth() / 2 - 50, g.getWindowHeight() / 2 - 50);
         }
+
     }
 }
