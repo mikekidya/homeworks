@@ -3,6 +3,7 @@ package group144.kidyankin;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -150,43 +151,45 @@ public class NetworkTest {
     @Test
     public void logicTest() {
         OS macOS = new OS("macOS", 0.2);
-        OS bolgenOS = new OS("BolgenOS", 1);
+        OS windows = new OS("Windows", 0.6);
 
         Computer a = new Computer("A", macOS);
-        Computer b = new Computer("B", bolgenOS);
-        Computer c = new Computer("C", bolgenOS);
-        Computer d = new Computer("D", bolgenOS);
-        Computer e = new Computer("E", bolgenOS);
+        Computer b = new Computer("B", windows);
+        Computer c = new Computer("C", macOS);
         a.addConnected(b);
-        a.addConnected(c);
         b.addConnected(c);
-        c.addConnected(d);
-        d.addConnected(e);
 
-        Network network = new Network(new ConcreteGenerator());
+
+        Network network = new Network(new FixedGenerator(Arrays.asList(0.8, 0.4, 0.3, 0.1)));
         network.addComputer(a);
         network.addComputer(b);
         network.addComputer(c);
-        network.addComputer(d);
-        network.addComputer(e);
         network.setFirstInfected(a);
 
         assertTrue(a.isInfected());
         assertFalse(b.isInfected());
         assertFalse(c.isInfected());
-        assertFalse(d.isInfected());
-        assertFalse(e.isInfected());
+
+        network.modelStep();
+        assertTrue(a.isInfected());
+        assertFalse(b.isInfected());
+        assertFalse(c.isInfected());
+
+        network.modelStep();
+        assertTrue(a.isInfected());
+        assertTrue(b.isInfected());
+        assertFalse(c.isInfected());
+
+        network.modelStep();
+        assertTrue(a.isInfected());
+        assertTrue(b.isInfected());
+        assertFalse(c.isInfected());
+
         network.modelStep();
         assertTrue(a.isInfected());
         assertTrue(b.isInfected());
         assertTrue(c.isInfected());
-        assertFalse(d.isInfected());
-        assertFalse(e.isInfected());
-        network.modelStep();
-        assertTrue(d.isInfected());
-        assertFalse(e.isInfected());
-        network.modelStep();
-        assertTrue(e.isInfected());
+
     }
 
 }
