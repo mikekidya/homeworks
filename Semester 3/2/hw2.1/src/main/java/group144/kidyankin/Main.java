@@ -72,7 +72,7 @@ public class Main {
     public static Network getNetwork(Scanner in) {
         List<OS> osList = getOperationSystems(in);
 
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
         addComputers(network, osList, in);
         addConnections(network, in);
         chooseFirst(network, in);

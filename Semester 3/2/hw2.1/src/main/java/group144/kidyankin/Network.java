@@ -8,13 +8,15 @@ public class Network {
 
     private List<Computer> computers;
     private List<Computer> couldBeInfected;
+    private RandomGenerator randomGenerator;
 
     /**
      * Creates empty network
      */
-    public Network() {
+    public Network(RandomGenerator randomGenerator) {
         computers = new LinkedList<>();
         couldBeInfected = new LinkedList<>();
+        this.randomGenerator = randomGenerator;
     }
 
     /**
@@ -54,7 +56,7 @@ public class Network {
         List<Computer> listOfNewInfected = new LinkedList<>();
         List<Computer> newProbablyInfected = new LinkedList<>();
         for (Computer computer : couldBeInfected) {
-            if (computer.tryInfect()) {
+            if (computer.tryInfect(randomGenerator)) {
                 listOfNewInfected.add(computer);
                 newProbablyInfected.addAll(addNewProbablyInfected(computer));
             }

@@ -31,10 +31,9 @@ public class Computer {
      * Tries to infect computer if it is possible
      * @return true if infection was successful
      */
-    public boolean tryInfect() {
+    public boolean tryInfect(RandomGenerator randomGenerator) {
         if (hasInfectedConnectedComputer) {
-            Random generator = new Random();
-            if (generator.nextFloat() < osType.getProbabilityOfInfection()) {
+            if (randomGenerator.nextDouble() < osType.getProbabilityOfInfection()) {
                 isInfected = true;
                 return true;
             }

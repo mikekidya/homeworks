@@ -19,7 +19,7 @@ public class NetworkTest {
         assertFalse(a.isInfected());
         assertFalse(b.isInfected());
 
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
         network.addComputer(a);
         network.addComputer(b);
         network.setFirstInfected(a);
@@ -34,7 +34,7 @@ public class NetworkTest {
         OS win = new OS("Windows", 0.6);
         Computer a = new Computer("A", macOS);
         Computer b = new Computer("B", win);
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
 
         assertEquals(0, network.getComputers().size());
         network.addComputer(a);
@@ -50,7 +50,7 @@ public class NetworkTest {
         OS win = new OS("Windows", 0.6);
         Computer a = new Computer("A", macOS);
         Computer b = new Computer("B", win);
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
         network.addComputer(a);
         network.addComputer(b);
         List<Computer> expected = new ArrayList<>();
@@ -74,7 +74,7 @@ public class NetworkTest {
         a.addConnected(d);
         d.addConnected(a);
 
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
         network.addComputer(a);
         network.addComputer(b);
         network.addComputer(c);
@@ -102,7 +102,7 @@ public class NetworkTest {
         for (int i = 0; i < numberOfTests; i++) {
             Computer a = new Computer("A", macOS);
             Computer b = new Computer("B", win);
-            Network network = new Network();
+            Network network = new Network(new ConcreteGenerator());
             network.addComputer(a);
             network.addComputer(b);
             a.addConnected(b);
@@ -127,7 +127,7 @@ public class NetworkTest {
         b.addConnected(c);
         c.addConnected(d);
         d.addConnected(e);
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
         network.addComputer(a);
         network.addComputer(b);
         network.addComputer(c);
@@ -163,7 +163,7 @@ public class NetworkTest {
         c.addConnected(d);
         d.addConnected(e);
 
-        Network network = new Network();
+        Network network = new Network(new ConcreteGenerator());
         network.addComputer(a);
         network.addComputer(b);
         network.addComputer(c);
